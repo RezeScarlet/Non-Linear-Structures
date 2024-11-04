@@ -1,5 +1,4 @@
 # Non-Linear-Structures
-Non linear structures representation
 This is a project assignment by <a href="https://github.com/davidbuzatto">David Buzatto</a> and made by <a href="https://github.com/RezeScarlet">RezeScarlet</a>, <a href="https://github.com/laosioor">laosioor</a> and <a href="https://github.com/Sunref">Sunref</a> for Data Structures class.
 
 This project includes a visual representation of the following Non Linear Structures:
