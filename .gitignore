@@ -1,4 +1,10 @@
 /dist
-/build
-/build
+/build/
+/build/*
+/build/.*
+/build/*.*
+build/
+build/*
+build/.*
+build/*.*
 build/built-jar.properties
