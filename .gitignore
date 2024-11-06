@@ -1,4 +1,2 @@
-/dist/*
-/build/*
-\build\*.*
-build/built-jar.properties
+dist/
+build/
