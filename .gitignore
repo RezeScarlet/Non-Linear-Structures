@@ -7,6 +7,9 @@ build/built-jar.properties
 /dist/
 /build/
 /nbproject/
+nbproject/
+/nbproject
 build
 build/classes/projetoesdarvores/esd
 nbproject/private/private.properties
+nbproject/private
