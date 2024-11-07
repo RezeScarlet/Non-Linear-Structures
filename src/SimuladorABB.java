@@ -7,8 +7,8 @@ import javax.swing.SwingUtilities;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
-import projetoesdarvores.esd.ArvoreBinariaBusca.Node;
-import projetoesdarvores.esd.ArvoreBinariaBusca;
+import arvores.ArvoreBinariaBusca.Node;
+import arvores.ArvoreBinariaBusca;
 
 /**
  * Simulador de árvores binárias de busca:
