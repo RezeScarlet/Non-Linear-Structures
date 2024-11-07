@@ -8,6 +8,10 @@ import static java.lang.Integer.parseInt;
 import javax.swing.UIManager;
 import arvores.ArvoreBinariaBusca.Node;
 import arvores.ArvoreBinariaBusca;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * Simulador de árvores binárias de busca: Simula as operações de inserir e
@@ -325,7 +329,12 @@ public class SimuladorABB extends EngineFrame {
     }
 
     private String inputPainel() {
-
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel label = new JLabel("Digite o número a ser inserido");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(label, BorderLayout.NORTH);
+        
+        
         UIManager UI = new UIManager();
         UI.put("OptionPane.background", new Color(250, 244, 237));
         UI.put("Panel.background", new Color(250, 244, 237));
@@ -333,7 +342,7 @@ public class SimuladorABB extends EngineFrame {
         UI.put("Button.background", new Color(180, 99, 122));
         UI.put("Button.foreground", new Color(224, 222, 244));
 
-        return JOptionPane.showInputDialog(null, "Digite o novo valor a ser inserido", "", JOptionPane.PLAIN_MESSAGE);
+        return JOptionPane.showInputDialog(null, panel, "", JOptionPane.PLAIN_MESSAGE);
 
     }
 
