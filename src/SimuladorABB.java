@@ -91,16 +91,21 @@ public class SimuladorABB extends EngineFrame {
         }
 
         if (isMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            
+
             int novoNoValor;
             String novoNoChave = inputPainel();
-            novoNoValor = parseInt (novoNoChave);
+            novoNoValor = parseInt(novoNoChave);
 
-            arvore.put(novoNoValor, novoNoChave);
-            nos = arvore.coletarParaDesenho();
+            if (arvore.contains(Integer.valueOf(novoNoChave))) {
+                inserido = "Valor já existe";
+                removido = "";
+            } else {
+                arvore.put(novoNoValor, novoNoChave);
+                nos = arvore.coletarParaDesenho();
 
-            inserido = novoNoChave;
-            removido = "";
+                inserido = novoNoChave;
+                removido = "";
+            }
         }
 
         if (isMouseButtonPressed(MOUSE_BUTTON_MIDDLE)) {
@@ -318,9 +323,9 @@ public class SimuladorABB extends EngineFrame {
             elapsedTime = 0; // Reinicia o tempo para o próximo nó
         }
     }
-    
-    private String inputPainel(){
-        
+
+    private String inputPainel() {
+
         UIManager UI = new UIManager();
         UI.put("OptionPane.background", new Color(250, 244, 237));
         UI.put("Panel.background", new Color(250, 244, 237));
@@ -329,7 +334,7 @@ public class SimuladorABB extends EngineFrame {
         UI.put("Button.foreground", new Color(224, 222, 244));
 
         return JOptionPane.showInputDialog(null, "Digite o novo valor a ser inserido", "", JOptionPane.PLAIN_MESSAGE);
-        
+
     }
 
     public static void main(String[] args) {
