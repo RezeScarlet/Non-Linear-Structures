@@ -8,3 +8,4 @@ build/*
 build/.*
 build/*.*
 build/built-jar.properties
+nbproject/*

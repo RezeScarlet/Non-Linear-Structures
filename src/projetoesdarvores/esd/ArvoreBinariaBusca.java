@@ -37,6 +37,7 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
     public Value value;
     public Node<Key, Value> left;
     public Node<Key, Value> right;
+    public Node<Key,Value> previous;
     public int nivel;
     public int ranque;
     public Color cor;
@@ -285,10 +286,12 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
 
   private void emOrdemColeta(Node<Key, Value> node, List<Node<Key, Value>> nos, int nivel) {
     if (node != null) {
+       
       emOrdemColeta(node.left, nos, nivel + 1);
       node.nivel = nivel;
       node.ranque = nos.getSize();
       node.cor = EngineFrame.GREEN;
+      node.previous = null;
       nos.add(node);
       emOrdemColeta(node.right, nos, nivel + 1);
     }

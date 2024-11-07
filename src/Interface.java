@@ -32,6 +32,7 @@ public class Interface extends javax.swing.JFrame {
         setBackground(new java.awt.Color(31, 29, 46));
         setName("jFrameMenu"); // NOI18N
         setUndecorated(true);
+        setResizable(false);
 
         Interface.setBackground(new java.awt.Color(31, 29, 46));
         Interface.setPreferredSize(new java.awt.Dimension(400, 400));
@@ -106,7 +107,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(textTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnABB, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(btnAVL, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,8 +115,6 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(btnAVP, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
-
-        textTitle.getAccessibleContext().setAccessibleName("Árvores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
