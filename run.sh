@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Select File"
-echo "1 - Menu"
+echo "0 - Menu"
 echo "1 - ABB"
 echo "2 - AVL"
 echo "3 - AVP"
