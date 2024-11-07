@@ -48,6 +48,7 @@ public class SimuladorABB extends EngineFrame {
 
   @Override
   public void create() {
+
     arvore = new ArvoreBinariaBusca<>();
 
     
@@ -81,20 +82,16 @@ public class SimuladorABB extends EngineFrame {
     Vector2 mousePos = getMousePositionPoint();
 
     if (isMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+        atualizarCentro(nos);
       for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
-        if (CollisionUtils.checkCollisionPointCircle(mousePos, no.centro, raio)) {
-          arvore.delete(no.key);
-          nos = arvore.coletarParaDesenho();
-
         if (CollisionUtils.checkCollisionPointCircle(mousePos, no.centro, raio)) {
               removido = no.value;
               inserido = "";
               arvore.delete(no.key);
               nos = arvore.coletarParaDesenho();
-            }
-
         }
       }
+    }
     
     if(isMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         
@@ -104,17 +101,18 @@ public class SimuladorABB extends EngineFrame {
         UIManager UI=new UIManager();
         UI.put("OptionPane.background", new Color(250,244,237));
         UI.put("Panel.background", new Color(250,244,237));
+        UI.put("Text.background", new Color(250, 244, 237));
         UI.put("Button.background", new Color(180,99,122));
         UI.put("Button.foreground", new Color(224,222,244));
-
         
         novoNoChave = JOptionPane.showInputDialog(null, "Digite o novo valor a ser inserido", "", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(null, "bosta");
         novoNoValor = parseInt(novoNoChave);
         
         arvore.put(novoNoValor, novoNoChave);
         nos = arvore.coletarParaDesenho();
         
-        inserido = novoNoChave;
+        inserido = novoNoChave; 
         removido = "";
     }
     
@@ -162,8 +160,6 @@ public class SimuladorABB extends EngineFrame {
             indiceNoAtual = 0;
         }
     }
-
-    }
   }
 
   @Override
@@ -189,7 +185,6 @@ public class SimuladorABB extends EngineFrame {
     
     drawText("M1 - Inserir   | M2 - Remover  | M3 - Voltar    | SPC - Resetar\n1  - Pré-Ordem | 2  - Em Ordem | 3  - Pós-Ordem | 4   - Em Nível", new Vector2(20, getScreenHeight() - 50), 20, WHITE);
     
-    // Atualize o timer para pintar os nós em ordem
     if (nosEmOrdem) {
 
         desenhaEmOrdemComTimer(getFrameTime());
@@ -206,9 +201,7 @@ public class SimuladorABB extends EngineFrame {
         
         desenhaEmNivelComTimer(getFrameTime());
     }
-    
-    
-    
+
   }
 
     private void desenharNo(ArvoreBinariaBusca.Node<Integer, String> no) {
