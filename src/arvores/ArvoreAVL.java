@@ -1,4 +1,4 @@
-package projetoesdarvores.esd;
+package arvores;
 
 import aesd.ds.implementations.linear.LinkedQueue;
 import aesd.ds.implementations.linear.ResizingArrayList;
