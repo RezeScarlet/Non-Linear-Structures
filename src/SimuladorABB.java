@@ -42,7 +42,7 @@ public class SimuladorABB extends EngineFrame {
     private int indiceNoAtual; // Índice do nó atual para pintar em ordem
 
     public SimuladorABB() {
-        super(800, 600, "Simulador de Árvores Binárias de Busca", 60, true);
+        super(800, 600, "Simulador de Árvores Binárias de Busca", 60, true, false, false, true, false);
     }
 
     @Override
