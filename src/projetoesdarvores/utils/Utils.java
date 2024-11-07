@@ -1,4 +1,4 @@
-package utils;
+package projetoesdarvores.utils;
 
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import java.awt.Color;

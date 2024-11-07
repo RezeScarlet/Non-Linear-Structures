@@ -1,8 +1,8 @@
-package testes;
+package projetoesdarvores.testes;
 
-import arvores.ArvoreAVL;
-import arvores.ArvoreBinariaBusca;
-import arvores.ArvoreVermelhoPreto;
+import projetoesdarvores.esd.ArvoreAVL;
+import projetoesdarvores.esd.ArvoreBinariaBusca;
+import projetoesdarvores.esd.ArvoreVermelhoPreto;
 
 /**
  * Testes das implementações das árvores.
