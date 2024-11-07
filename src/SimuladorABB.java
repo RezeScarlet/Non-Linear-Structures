@@ -1,16 +1,14 @@
 
-import aesd.ds.interfaces.List;
 import java.awt.Color;
-
 import javax.swing.JOptionPane;
-
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
 import static java.lang.Integer.parseInt;
 import javax.swing.UIManager;
-import projetoesdarvores.esd.ArvoreBinariaBusca.Node;
-import projetoesdarvores.esd.ArvoreBinariaBusca;
+import arvores.ArvoreBinariaBusca.Node;
+import arvores.ArvoreBinariaBusca;
+
 
 /**
  * Simulador de árvores binárias de busca:
@@ -28,7 +26,7 @@ public class SimuladorABB extends EngineFrame {
   private aesd.ds.interfaces.List<Node<Integer, String>> nosEmNivelDesenho;
   private int margemCima;
   private int margemEsquerda;
-   private int margemDireita;
+  private int margemDireita;
   private int raio;
   private Vector2 espacamento;
   private Color texto = new Color (57,53,82);
@@ -51,8 +49,7 @@ public class SimuladorABB extends EngineFrame {
   @Override
   public void create() {
     arvore = new ArvoreBinariaBusca<>();
-    
-    
+
     
     arvore.put(8, "8");
     arvore.put(42, "42");
@@ -60,34 +57,34 @@ public class SimuladorABB extends EngineFrame {
     arvore.put(23, "23");
     arvore.put(16, "16");
     arvore.put(4, "4");
-    
+
     espacamento = new Vector2(100, 50);
     
     
     nos = arvore.coletarParaDesenho();
 
     margemCima = 100;
-    margemEsquerda= 50;
+    margemEsquerda = 50;
     margemDireita = getScreenWidth();
     raio = 20;
     inserido = "";
     removido = "";
 
     atualizarCentro(nos);
-    
+
   }
 
   @Override
   public void update() {
-      
+
     atualizarCentro(nos);
     Vector2 mousePos = getMousePositionPoint();
 
     if (isMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
-        atualizarCentro(nos);
-
-
       for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
+        if (CollisionUtils.checkCollisionPointCircle(mousePos, no.centro, raio)) {
+          arvore.delete(no.key);
+          nos = arvore.coletarParaDesenho();
 
         if (CollisionUtils.checkCollisionPointCircle(mousePos, no.centro, raio)) {
               removido = no.value;
@@ -95,8 +92,8 @@ public class SimuladorABB extends EngineFrame {
               arvore.delete(no.key);
               nos = arvore.coletarParaDesenho();
             }
-        }
 
+        }
       }
     
     if(isMouseButtonPressed(MOUSE_BUTTON_LEFT)){
@@ -167,6 +164,7 @@ public class SimuladorABB extends EngineFrame {
     }
 
     }
+  }
 
   @Override
   public void draw() {
@@ -175,11 +173,12 @@ public class SimuladorABB extends EngineFrame {
     for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
       desenharSetas(no);    
     }
-    
+
     for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
-        desenharNo(no);
-        int tamanhoTexto = measureText(no.key.toString(), 20);
-        drawText(no.key.toString(), no.centro.x - tamanhoTexto / 2, no.centro.y - 5, 20, texto);
+      desenharNo(no);
+      int tamanhoTexto = measureText(no.key.toString(), 20);
+      drawText(no.key.toString(), no.centro.x - tamanhoTexto / 2, no.centro.y - 5, 20, texto);
+
     }
     
     if (!inserido.equals("")) {
@@ -221,19 +220,21 @@ public class SimuladorABB extends EngineFrame {
         fillCircle(no.centro.x, no.centro.y, raio, noOrdem);
     }
 
-    private void desenharSetas(ArvoreBinariaBusca.Node<Integer, String> no) {
-      if (no.nivel == 0) {
-          drawLine(no.centro.x, no.centro.y - 20, no.centro.x, no.centro.y - 40, noContorno);
-          drawText("raiz", no.centro.x - measureText("raiz", 20) / 2, no.centro.y-60, 20, new Color (250,244,237));
-      }
-      if (no.left != null) {
-          drawLine(no.centro.x, no.centro.y, no.left.centro.x, no.left.centro.y, noContorno);
-      }
+      private void desenharSetas(ArvoreBinariaBusca.Node<Integer, String> no) {
+    if (no.previous == null && no.nivel == 0) {
+      drawLine(no.centro.x, no.centro.y - 20, no.centro.x, no.centro.y - 40, noContorno);
+      drawText("raiz", no.centro.x - measureText("raiz", 20) / 2, no.centro.y - 60, 20, new Color(250, 244, 237));
 
-      if (no.right != null) {
-          drawLine(no.centro.x, no.centro.y, no.right.centro.x, no.right.centro.y, noContorno);
-      }
     }
+    if (no.left != null) {
+      drawLine(no.centro.x, no.centro.y, no.left.centro.x, no.left.centro.y, noContorno);
+
+    }
+    if (no.right != null) {
+      drawLine(no.centro.x, no.centro.y, no.right.centro.x, no.right.centro.y, noContorno);
+
+    }
+  }
 
     private void atualizarCentro(aesd.ds.interfaces.List<Node<Integer, String>> arvore) {  
       espacamento.x = (arvore.getSize() * 5) + 50;
@@ -334,8 +335,6 @@ public class SimuladorABB extends EngineFrame {
                 elapsedTime = 0; // Reinicia o tempo para o próximo nó
         }
     }
-
-
 
   public static void main(String[] args) {
     new SimuladorABB();

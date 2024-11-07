@@ -6,6 +6,10 @@ echo "2 - AVL"
 echo "3 - AVP"
 read option
 
+if [[ "$option" == "0" ]]; then
+  ant -Dnb.internal.action.name=run.single -Djavac.includes=Interface.java -Drun.class=Interface run-single
+fi
+
 if [[ "$option" == "1" ]]; then
   ant -Dnb.internal.action.name=run.single -Djavac.includes=SimuladorABB.java -Drun.class=SimuladorABB run-single
 fi
