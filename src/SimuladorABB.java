@@ -97,7 +97,7 @@ public class SimuladorABB extends EngineFrame {
 
             UIManager UI = new UIManager();
             UI.put("OptionPane.background", new Color(250, 244, 237));
-            UI.put("Panel.background", BLACK);
+            UI.put("Panel.background", new Color(250, 244, 237));
             UI.put("Text.background", new Color(250, 244, 237));
             UI.put("Button.background", new Color(180, 99, 122));
             UI.put("Button.foreground", new Color(224, 222, 244));
