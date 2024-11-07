@@ -9,6 +9,7 @@
     </Property>
     <Property name="name" type="java.lang.String" value="jFrameMenu" noResource="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -84,7 +85,7 @@
                   <Component id="textName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="textTitle" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Component id="btnABB" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="btnAVL" min="-2" pref="52" max="-2" attributes="0"/>
@@ -121,9 +122,6 @@
               <Color blue="92" green="6f" red="eb" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ABB"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnABBActionPerformed"/>
@@ -174,9 +172,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc1;rvores"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="&#xc1;rvores"/>
-          </AccessibilityProperties>
         </Component>
       </SubComponents>
     </Container>
