@@ -1,12 +1,12 @@
-<<<<<<< HEAD
-**/nbproject/private/
-**/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
 build/
 nbbuild/
-=======
 /dist
 /build
-/build
 build/built-jar.properties
->>>>>>> parent of 81fe2e8 (git ignore 2)
+/dist/
+/build/
+/nbproject/
+build
+build/classes/projetoesdarvores/esd
+nbproject/private/private.properties

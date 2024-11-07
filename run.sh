@@ -1,11 +1,12 @@
 #!/bin/bash
 
 echo "Select File"
+echo "1 - Menu"
 echo "1 - ABB"
 echo "2 - AVL"
 echo "3 - AVP"
-# read option
-option=1
+read option
+# option=1
 if [[ "$option" == "0" ]]; then
   ant -Dnb.internal.action.name=run.single -Djavac.includes=Interface.java -Drun.class=Interface run-single
 fi
