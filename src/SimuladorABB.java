@@ -91,20 +91,10 @@ public class SimuladorABB extends EngineFrame {
         }
 
         if (isMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-
-            String novoNoChave;
+            
             int novoNoValor;
-
-            UIManager UI = new UIManager();
-            UI.put("OptionPane.background", new Color(250, 244, 237));
-            UI.put("Panel.background", new Color(250, 244, 237));
-            UI.put("Text.background", new Color(250, 244, 237));
-            UI.put("Button.background", new Color(180, 99, 122));
-            UI.put("Button.foreground", new Color(224, 222, 244));
-
-            novoNoChave = JOptionPane.showInputDialog(null, "Digite o novo valor a ser inserido", "", JOptionPane.PLAIN_MESSAGE);
-
-            novoNoValor = parseInt(novoNoChave);
+            String novoNoChave = inputPainel();
+            novoNoValor = parseInt (novoNoChave);
 
             arvore.put(novoNoValor, novoNoChave);
             nos = arvore.coletarParaDesenho();
@@ -327,6 +317,19 @@ public class SimuladorABB extends EngineFrame {
 
             elapsedTime = 0; // Reinicia o tempo para o próximo nó
         }
+    }
+    
+    private String inputPainel(){
+        
+        UIManager UI = new UIManager();
+        UI.put("OptionPane.background", new Color(250, 244, 237));
+        UI.put("Panel.background", new Color(250, 244, 237));
+        UI.put("Text.background", new Color(250, 244, 237));
+        UI.put("Button.background", new Color(180, 99, 122));
+        UI.put("Button.foreground", new Color(224, 222, 244));
+
+        return JOptionPane.showInputDialog(null, "Digite o novo valor a ser inserido", "", JOptionPane.PLAIN_MESSAGE);
+        
     }
 
     public static void main(String[] args) {
