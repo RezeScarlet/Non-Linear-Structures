@@ -1,14 +1,13 @@
 package arvores;
 
+import java.awt.Color;
+import java.util.Iterator;
+
 import aesd.ds.implementations.linear.LinkedQueue;
 import aesd.ds.implementations.linear.ResizingArrayList;
 import aesd.ds.interfaces.List;
 import aesd.ds.interfaces.Queue;
-import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
-import java.awt.Color;
 import br.com.davidbuzatto.jsge.math.Vector2;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * Implementação de uma árvore binária de busca fundamental (Binary Search
@@ -38,7 +37,7 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
     public Value value;
     public Node<Key, Value> left;
     public Node<Key, Value> right;
-    public Node<Key,Value> previous;
+    public Node<Key, Value> previous;
     public int nivel;
     public int ranque;
     public Color cor;
@@ -270,43 +269,43 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
     inOrder(root, keys);
     return keys;
   }
-  
-   public List<Key> traversePreOrder() {
+
+  public List<Key> traversePreOrder() {
     List<Key> keys = new ResizingArrayList<>();
     preOrder(root, keys);
     return keys;
   }
-   
-   public aesd.ds.interfaces.List<Node<Key, Value>> traversePreOrderDesenho() {
+
+  public aesd.ds.interfaces.List<Node<Key, Value>> traversePreOrderDesenho() {
     aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
     preOrderDesenho(root, nodes);
     return nodes;
   }
 
-   public List<Key> traversePostOrder() {
+  public List<Key> traversePostOrder() {
     List<Key> keys = new ResizingArrayList<>();
     postOrder(root, keys);
     return keys;
   }
 
-   public aesd.ds.interfaces.List<Node<Key, Value>> traversePostOrderDesenho() {
+  public aesd.ds.interfaces.List<Node<Key, Value>> traversePostOrderDesenho() {
     aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
     postOrderDesenho(root, nodes);
     return nodes;
   }
-   
-   public List<Key> traverseInLevel() {
+
+  public List<Key> traverseInLevel() {
     List<Key> keys = new ResizingArrayList<>();
     inLevel(root, keys);
     return keys;
   }
-   
-    public aesd.ds.interfaces.List<Node<Key, Value>> traverseInLevelDesenho() {
-        aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
-        inLevelDesenho(root, nodes);
-        return nodes;
-    }
-   
+
+  public aesd.ds.interfaces.List<Node<Key, Value>> traverseInLevelDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    inLevelDesenho(root, nodes);
+    return nodes;
+  }
+
   private void inOrder(Node<Key, Value> node, List<Key> keys) {
     if (node != null) {
       inOrder(node.left, keys);
@@ -314,83 +313,83 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
       inOrder(node.right, keys);
     }
   }
-  
- private void preOrder(Node<Key, Value> node, List<Key> keys) {
+
+  private void preOrder(Node<Key, Value> node, List<Key> keys) {
     if (node != null) {
-        keys.add(node.key);
-        preOrder(node.left, keys);   
-        preOrder(node.right, keys);
+      keys.add(node.key);
+      preOrder(node.left, keys);
+      preOrder(node.right, keys);
     }
   }
- 
+
   private void preOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
     if (node != null) {
-        nodes.add(node);
-        preOrderDesenho(node.left, nodes);   
-        preOrderDesenho(node.right, nodes);
+      nodes.add(node);
+      preOrderDesenho(node.left, nodes);
+      preOrderDesenho(node.right, nodes);
     }
   }
-  
- private void postOrder(Node<Key, Value> node, List<Key> keys) {
-      if (node != null) {
-        postOrder(node.left, keys);
-        postOrder(node.right, keys);
-        keys.add(node.key); 
-      }  
+
+  private void postOrder(Node<Key, Value> node, List<Key> keys) {
+    if (node != null) {
+      postOrder(node.left, keys);
+      postOrder(node.right, keys);
+      keys.add(node.key);
+    }
   }
- 
+
   private void postOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
-      if (node != null) {
-        postOrderDesenho(node.left, nodes);
-        postOrderDesenho(node.right, nodes);
-        nodes.add(node); 
-      }  
+    if (node != null) {
+      postOrderDesenho(node.left, nodes);
+      postOrderDesenho(node.right, nodes);
+      nodes.add(node);
+    }
   }
-  
+
   private void inLevel(Node<Key, Value> node, List<Key> keys) {
     if (node == null) {
-        return;
+      return;
     }
 
     Queue<Node<Key, Value>> queue = new LinkedQueue<>();
     queue.enqueue(node);
 
     while (!queue.isEmpty()) {
-        Node<Key, Value> current = queue.dequeue();
-        keys.add(current.key);
+      Node<Key, Value> current = queue.dequeue();
+      keys.add(current.key);
 
-        if (current.left != null) {
-            queue.enqueue(current.left);
-        }
+      if (current.left != null) {
+        queue.enqueue(current.left);
+      }
 
-        if (current.right != null) {
-            queue.enqueue(current.right);
-        }
+      if (current.right != null) {
+        queue.enqueue(current.right);
+      }
     }
-    }
-  
+  }
+
   private void inLevelDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
     if (node == null) {
-        return;
+      return;
     }
 
     Queue<Node<Key, Value>> queue = new LinkedQueue<>();
     queue.enqueue(node);
 
     while (!queue.isEmpty()) {
-        Node<Key, Value> current = queue.dequeue();
-        nodes.add(current);
+      Node<Key, Value> current = queue.dequeue();
+      nodes.add(current);
 
-        if (current.left != null) {
-            queue.enqueue(current.left);
-        }
+      if (current.left != null) {
+        queue.enqueue(current.left);
+      }
 
-        if (current.right != null) {
-            queue.enqueue(current.right);
-        }
+      if (current.right != null) {
+        queue.enqueue(current.right);
+      }
     }
-    }
-  
+  }
+
   public List<Node<Key, Value>> coletarParaDesenho() {
     List<Node<Key, Value>> nos = new ResizingArrayList<>();
     emOrdemColeta(root, nos, 0);
@@ -402,14 +401,13 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
       emOrdemColeta(node.left, nos, nivel + 1);
       node.nivel = nivel;
       node.ranque = nos.getSize();
-      node.cor = new Color (235,188,186);
+      node.cor = new Color(235, 188, 186);
       node.previous = null;
       nos.add(node);
       emOrdemColeta(node.right, nos, nivel + 1);
     }
   }
 
-  
   @Override
   public String toString() {
 
