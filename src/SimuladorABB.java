@@ -186,24 +186,8 @@ public class SimuladorABB extends EngineFrame {
         new Vector2(20, getScreenHeight() - 50), 20, WHITE);
 
     if (traverseState != traverse.None) {
-      animateInOrder(getFrameTime());
+      traverseAnimation(getFrameTime());
     }
-    // switch (traverseState) {
-    // case PreOrder:
-    // animateInOrder(getFrameTime());
-    // break;
-    // case InOrder:
-    // animatePreOrder(getFrameTime());
-    // break;
-    // case PostOrder:
-    // animatePostOrder(getFrameTime());
-    // break;
-    // case InLevel:
-    // animateInLevel(getFrameTime());
-    // break;
-    // default:
-    // break;
-    // }
 
   }
 
@@ -266,24 +250,7 @@ public class SimuladorABB extends EngineFrame {
     }
   }
 
-  // private void animatePreOrder(double deltaTime) {
-  //   elapsedTime += deltaTime;
-  //
-  //   if (elapsedTime >= 1.0) { // A cada 2 segundos
-  //     if (indiceNoAtual < traverseNodes.getSize()) {
-  //       // Pinta o nó atual
-  //       ArvoreBinariaBusca.Node<Integer, String> noAtual = traverseNodes.get(indiceNoAtual);
-  //       noAtual.cor = noOrdem;
-  //       indiceNoAtual++;
-  //     } else {
-  //       traverseState = traverse.None; // Finaliza a pintura em ordem
-  //     }
-  //
-  //     elapsedTime = 0; // Reinicia o tempo para o próximo nó
-  //   }
-  // }
-
-  private void animateInOrder(double deltaTime) {
+  private void traverseAnimation(double deltaTime) {
     elapsedTime += deltaTime;
 
     if (elapsedTime >= 1.0) { // A cada 2 segundos
@@ -299,40 +266,6 @@ public class SimuladorABB extends EngineFrame {
       elapsedTime = 0; // Reinicia o tempo para o próximo nó
     }
   }
-
-  // private void animatePostOrder(double deltaTime) {
-  //   elapsedTime += deltaTime;
-  //
-  //   if (elapsedTime >= 1.0) { // A cada 2 segundos
-  //     if (indiceNoAtual < traverseNodes.getSize()) {
-  //       // Pinta o nó atual
-  //       ArvoreBinariaBusca.Node<Integer, String> noAtual = traverseNodes.get(indiceNoAtual);
-  //       noAtual.cor = noOrdem;
-  //       indiceNoAtual++;
-  //     } else {
-  //       traverseState = traverse.None; // Finaliza a pintura em ordem
-  //     }
-  //
-  //     elapsedTime = 0; // Reinicia o tempo para o próximo nó
-  //   }
-  // }
-  //
-  // private void animateInLevel(double deltaTime) {
-  //   elapsedTime += deltaTime;
-  //
-  //   if (elapsedTime >= 1.0) {
-  //     if (indiceNoAtual < traverseNodes.getSize()) {
-  //       // Pinta o nó atual
-  //       ArvoreBinariaBusca.Node<Integer, String> noAtual = traverseNodes.get(indiceNoAtual);
-  //       noAtual.cor = noOrdem;
-  //       indiceNoAtual++;
-  //     } else {
-  //       traverseState = traverse.None; // Finaliza a pintura em ordem
-  //     }
-  //
-  //     elapsedTime = 0; // Reinicia o tempo para o próximo nó
-  //   }
-  // }
 
   private String inputPainel() {
     JPanel panel = new JPanel(new BorderLayout());
