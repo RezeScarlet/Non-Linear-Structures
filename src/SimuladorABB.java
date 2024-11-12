@@ -133,8 +133,9 @@ public class SimuladorABB extends EngineFrame {
 
     if (isKeyPressed(KEY_TWO)) {
       traverseState = traverse.InOrder;
-      elapsedTime = 1; // Reinicia o tempo
-      indiceNoAtual = 0; // Reinicia o índice do nó
+      elapsedTime = 1;
+      indiceNoAtual = 0;
+      traverseNodes = arvore.traverseInOrderDesenho();
     }
 
     if (isKeyPressed(KEY_THREE)) {
@@ -225,14 +226,14 @@ public class SimuladorABB extends EngineFrame {
       atualizarAnterior(no);
 
       if (no.previous == null) {
-        no.centro = new Vector2(margemDireita / 2, espacamento.y * no.nivel + margemCima); // muda a posição do nó
+        no.centro = new Vector2(margemDireita / 2, espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
       } else {
         if (no == no.previous.right) {
           no.centro = new Vector2((no.previous.centro.x + espacamento.x / no.nivel),
-              espacamento.y * no.nivel + margemCima); // muda a posição do nó
+              espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
         } else {
           no.centro = new Vector2(no.previous.centro.x - espacamento.x / no.nivel,
-              espacamento.y * no.nivel + margemCima);
+              espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
         }
       }
     }

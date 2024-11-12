@@ -269,6 +269,12 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
     inOrder(root, keys);
     return keys;
   }
+ 
+  public aesd.ds.interfaces.List<Node<Key, Value>> traverseInOrderDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    inOrderDesenho(root, nodes);
+    return nodes;
+  }
 
   public List<Key> traversePreOrder() {
     List<Key> keys = new ResizingArrayList<>();
@@ -311,6 +317,14 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
       inOrder(node.left, keys);
       keys.add(node.key);
       inOrder(node.right, keys);
+    }
+  }
+  
+  private void inOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
+    if (node != null) {
+      inOrderDesenho(node.left, nodes);
+      nodes.add(node);
+      inOrderDesenho(node.right, nodes);
     }
   }
 
