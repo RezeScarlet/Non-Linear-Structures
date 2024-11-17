@@ -88,8 +88,9 @@ public class SimuladorABB extends EngineFrame {
 
     @Override
     public void update() {
-
         atualizarCentro(nos);
+
+                    
         Vector2 mousePos = getMousePositionPoint();
 
         if (isMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
@@ -124,28 +125,28 @@ public class SimuladorABB extends EngineFrame {
         if (isKeyPressed(KEY_Q)) {
             this.dispose();
         }
-        if (isKeyPressed(KEY_ONE)) {
+        if (isKeyPressed(KEY_ONE) || isKeyPressed(KEY_KP_1)) {
             traverseState = traverse.PreOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traversePreOrderDesenho();
         }
 
-        if (isKeyPressed(KEY_TWO)) {
+        if (isKeyPressed(KEY_TWO) || isKeyPressed(KEY_KP_2)) {
             traverseState = traverse.InOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traverseInOrderDesenho();
         }
 
-        if (isKeyPressed(KEY_THREE)) {
+        if (isKeyPressed(KEY_THREE) || isKeyPressed(KEY_KP_3)) {
             traverseState = traverse.PostOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traversePostOrderDesenho();
         }
 
-        if (isKeyPressed(KEY_FOUR)) {
+        if (isKeyPressed(KEY_FOUR) || isKeyPressed(KEY_KP_4)) {
             traverseState = traverse.InLevel;
             elapsedTime = 1;
             indiceNoAtual = 0;

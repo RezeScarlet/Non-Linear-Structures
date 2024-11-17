@@ -1,3 +1,6 @@
+
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author ferma
@@ -36,6 +39,11 @@ public class Interface extends javax.swing.JFrame {
 
         Interface.setBackground(new java.awt.Color(31, 29, 46));
         Interface.setPreferredSize(new java.awt.Dimension(400, 400));
+        Interface.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                InterfaceKeyPressed(evt);
+            }
+        });
 
         textName.setAlignment(java.awt.Label.CENTER);
         textName.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -142,6 +150,10 @@ public class Interface extends javax.swing.JFrame {
     private void btnAVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAVPActionPerformed
         new SimuladorAVP();
     }//GEN-LAST:event_btnAVPActionPerformed
+
+    private void InterfaceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InterfaceKeyPressed
+
+    }//GEN-LAST:event_InterfaceKeyPressed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,7 @@ import aesd.ds.implementations.linear.LinkedQueue;
 import aesd.ds.implementations.linear.ResizingArrayList;
 import aesd.ds.interfaces.List;
 import aesd.ds.interfaces.Queue;
+import br.com.davidbuzatto.jsge.math.Vector2;
 import java.awt.Color;
 import java.util.Iterator;
 
@@ -29,8 +30,15 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         public Value value;
         public Node<Key, Value> left;
         public Node<Key, Value> right;
+        public Node<Key, Value> previous;
+        public int nivel;
+        public int ranque;
+        public Color cor;
+        public Vector2 centro;
 
         public int height;
+        public String AVLIndicator;
+      
 
         @Override
         public String toString() {
@@ -403,12 +411,6 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         return keys;
     }
 
-    private List<Key> traverseInOrder() {
-        List<Key> keys = new ResizingArrayList<>();
-        inOrder(root, keys);
-        return keys;
-    }
-
     private void inOrder(Node<Key, Value> node, List<Key> keys) {
         if (node != null) {
             inOrder(node.left, keys);
@@ -460,8 +462,140 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         }
 
     }
+    
+    private List<Key> traverseInOrder() {
+        List<Key> keys = new ResizingArrayList<>();
+        inOrder(root, keys);
+        return keys;
+    }
+ 
+  public aesd.ds.interfaces.List<Node<Key, Value>> traverseInOrderDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    inOrderDesenho(root, nodes);
+    return nodes;
+  }
 
-    public List<ArvoreAVL.Node<Key, Value>> coletarParaDesenho() {
+  public List<Key> traversePreOrder() {
+    List<Key> keys = new ResizingArrayList<>();
+    preOrder(root, keys);
+    return keys;
+  }
+
+  public aesd.ds.interfaces.List<Node<Key, Value>> traversePreOrderDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    preOrderDesenho(root, nodes);
+    return nodes;
+  }
+
+  public List<Key> traversePostOrder() {
+    List<Key> keys = new ResizingArrayList<>();
+    postOrder(root, keys);
+    return keys;
+  }
+
+  public aesd.ds.interfaces.List<Node<Key, Value>> traversePostOrderDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    postOrderDesenho(root, nodes);
+    return nodes;
+  }
+
+  public List<Key> traverseInLevel() {
+    List<Key> keys = new ResizingArrayList<>();
+    inLevel(root, keys);
+    return keys;
+  }
+
+  public aesd.ds.interfaces.List<Node<Key, Value>> traverseInLevelDesenho() {
+    aesd.ds.interfaces.List<Node<Key, Value>> nodes = new ResizingArrayList<>();
+    inLevelDesenho(root, nodes);
+    return nodes;
+  }
+  
+  private void inOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
+    if (node != null) {
+      inOrderDesenho(node.left, nodes);
+      nodes.add(node);
+      inOrderDesenho(node.right, nodes);
+    }
+  }
+
+  private void preOrder(Node<Key, Value> node, List<Key> keys) {
+    if (node != null) {
+      keys.add(node.key);
+      preOrder(node.left, keys);
+      preOrder(node.right, keys);
+    }
+  }
+
+  private void preOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
+    if (node != null) {
+      nodes.add(node);
+      preOrderDesenho(node.left, nodes);
+      preOrderDesenho(node.right, nodes);
+    }
+  }
+
+  private void postOrder(Node<Key, Value> node, List<Key> keys) {
+    if (node != null) {
+      postOrder(node.left, keys);
+      postOrder(node.right, keys);
+      keys.add(node.key);
+    }
+  }
+
+  private void postOrderDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
+    if (node != null) {
+      postOrderDesenho(node.left, nodes);
+      postOrderDesenho(node.right, nodes);
+      nodes.add(node);
+    }
+  }
+
+  private void inLevel(Node<Key, Value> node, List<Key> keys) {
+    if (node == null) {
+      return;
+    }
+
+    Queue<Node<Key, Value>> queue = new LinkedQueue<>();
+    queue.enqueue(node);
+
+    while (!queue.isEmpty()) {
+      Node<Key, Value> current = queue.dequeue();
+      keys.add(current.key);
+
+      if (current.left != null) {
+        queue.enqueue(current.left);
+      }
+
+      if (current.right != null) {
+        queue.enqueue(current.right);
+      }
+    }
+  }
+
+  private void inLevelDesenho(Node<Key, Value> node, aesd.ds.interfaces.List<Node<Key, Value>> nodes) {
+    if (node == null) {
+      return;
+    }
+
+    Queue<Node<Key, Value>> queue = new LinkedQueue<>();
+    queue.enqueue(node);
+
+    while (!queue.isEmpty()) {
+      Node<Key, Value> current = queue.dequeue();
+      nodes.add(current);
+
+      if (current.left != null) {
+        queue.enqueue(current.left);
+      }
+
+      if (current.right != null) {
+        queue.enqueue(current.right);
+      }
+    }
+  }
+
+    public List<Node<Key, Value>> coletarParaDesenho() {
         List<ArvoreAVL.Node<Key, Value>> nos = new ResizingArrayList<>();
         emOrdemColeta(root, nos, 0);
         return nos;
@@ -474,12 +608,26 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
             node.ranque = nos.getSize();
             node.cor = new Color(235, 188, 186);
             node.previous = null;
+            setAVLIndicator(node);
             nos.add(node);
             emOrdemColeta(node.right, nos, nivel + 1);
         }
     }
-    return nos ;
-}
-}
-
+    
+    private void setAVLIndicator(ArvoreAVL.Node<Key, Value> node) {
+        int a;
+        int b;
+        if (node.left == null) {
+            a = 0;
+        } else {
+            a = node.left.height;
+        }
+        if (node.right == null) {
+            b = 0;
+        } else {
+            b = node.right.height;
+        }
+        
+        node.AVLIndicator = String.valueOf(a - b);
+    }
 }

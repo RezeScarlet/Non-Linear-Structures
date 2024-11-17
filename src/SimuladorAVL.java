@@ -1,5 +1,6 @@
 
 import arvores.ArvoreAVL;
+import arvores.ArvoreAVL.Node;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -9,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import arvores.ArvoreBinariaBusca;
-import arvores.ArvoreBinariaBusca.Node;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_FOUR;
 import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_ONE;
@@ -44,7 +43,6 @@ public class SimuladorAVL extends EngineFrame {
 
     private ArvoreAVL<Integer, String> arvore;
     private aesd.ds.interfaces.List<Node<Integer, String>> nos;
-
     private aesd.ds.interfaces.List<Node<Integer, String>> traverseNodes;
     private int margemCima;
     // NOTE: Not used
@@ -84,6 +82,7 @@ public class SimuladorAVL extends EngineFrame {
         espacamento = new Vector2(100, 50);
 
         nos = arvore.coletarParaDesenho();
+      
 
         margemCima = 100;
         // NOTE: Not used
@@ -102,11 +101,12 @@ public class SimuladorAVL extends EngineFrame {
     public void update() {
 
         atualizarCentro(nos);
+
         Vector2 mousePos = getMousePositionPoint();
 
         if (isMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
             atualizarCentro(nos);
-            for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
+            for (ArvoreAVL.Node<Integer, String> no : nos) {
                 if (CollisionUtils.checkCollisionPointCircle(mousePos, no.centro, radius)) {
                     removido = no.value;
                     inserido = "";
@@ -136,28 +136,28 @@ public class SimuladorAVL extends EngineFrame {
         if (isKeyPressed(KEY_Q)) {
             this.dispose();
         }
-        if (isKeyPressed(KEY_ONE)) {
+        if (isKeyPressed(KEY_ONE) || isKeyPressed(KEY_KP_1)) {
             traverseState = traverse.PreOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traversePreOrderDesenho();
         }
-
-        if (isKeyPressed(KEY_TWO)) {
+ 
+        if (isKeyPressed(KEY_TWO) || isKeyPressed(KEY_KP_2)) {
             traverseState = traverse.InOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traverseInOrderDesenho();
         }
 
-        if (isKeyPressed(KEY_THREE)) {
+        if (isKeyPressed(KEY_THREE) || isKeyPressed(KEY_KP_3)) {
             traverseState = traverse.PostOrder;
             elapsedTime = 1;
             indiceNoAtual = 0;
             traverseNodes = arvore.traversePostOrderDesenho();
         }
 
-        if (isKeyPressed(KEY_FOUR)) {
+        if (isKeyPressed(KEY_FOUR) || isKeyPressed(KEY_KP_4)) {
             traverseState = traverse.InLevel;
             elapsedTime = 1;
             indiceNoAtual = 0;
@@ -176,18 +176,19 @@ public class SimuladorAVL extends EngineFrame {
     public void draw() {
         clearBackground(new Color(31, 29, 46));
 
-        for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
+        for (ArvoreAVL.Node<Integer, String> no : nos) {
             desenharSetas(no, lineColor);
         }
 
-        for (ArvoreBinariaBusca.Node<Integer, String> no : nos) {
+        for (ArvoreAVL.Node<Integer, String> no : nos) {
             desenharNo(no, radius, lineColor);
             drawAVLIndicator(no, squareSize, lineColor);
+            
             int tamanhoTexto = measureText(no.key.toString(), 20);
             drawText(no.key.toString(), no.centro.x - tamanhoTexto / 2, no.centro.y - 5, 20, texto);
-            int AVLIndicatorTextSize = measureText("-T", 20);
-            drawText("-T"/* HEIGHT */, no.centro.x - AVLIndicatorTextSize / 2 + squareSize, no.centro.y - 5 - squareSize/2, 20, texto);
-
+            
+            int AVLIndicatorTextSize = measureText(no.AVLIndicator, 20);
+            drawText(no.AVLIndicator, no.centro.x - AVLIndicatorTextSize / 2 + squareSize, no.centro.y - 5 - squareSize/2, 20, texto);
         }
 
         if (!inserido.equals("")) {
@@ -207,23 +208,19 @@ public class SimuladorAVL extends EngineFrame {
 
     }
 
-    private void desenharNo(ArvoreBinariaBusca.Node<Integer, String> node, int radius, Color lineColor) {
+    private void desenharNo(ArvoreAVL.Node<Integer, String> node, int radius, Color lineColor) {
         fillCircle(node.centro.x, node.centro.y, radius, node.cor);
         drawCircle(node.centro.x, node.centro.y, radius, lineColor);
     }
 
-    private void drawAVLIndicator(ArvoreBinariaBusca.Node<Integer, String> node, int squareSize, Color lineColor) {
+    private void drawAVLIndicator(ArvoreAVL.Node<Integer, String> node, int squareSize, Color lineColor) {
         Vector2 center = new Vector2(node.centro.x + squareSize / 2, node.centro.y - squareSize);
         fillRectangle(center, squareSize, squareSize, WHITE);
         drawRectangle(center, squareSize, squareSize, lineColor);
 
     }
 
-    // NOTE: Not used
-    // private void pintarNoOrdem(ArvoreBinariaBusca.Node<Integer, String> no) {
-    // fillCircle(no.centro.x, no.centro.y, radius, noOrdem);
-    // }
-    private void desenharSetas(ArvoreBinariaBusca.Node<Integer, String> no, Color lineColor) {
+    private void desenharSetas(ArvoreAVL.Node<Integer, String> no, Color lineColor) {
         if (no.previous == null && no.nivel == 0) {
             drawLine(no.centro.x, no.centro.y - 20, no.centro.x, no.centro.y - 40, lineColor);
             drawText("raiz", no.centro.x - measureText("raiz", 20) / 2, no.centro.y - 60, 20, new Color(250, 244, 237));
@@ -243,7 +240,7 @@ public class SimuladorAVL extends EngineFrame {
         espacamento.x = (arvore.getSize() * 5) + 50;
         espacamento.y = (arvore.getSize() * 2) + 50;
 
-        for (ArvoreBinariaBusca.Node<Integer, String> no : arvore) {
+        for (ArvoreAVL.Node<Integer, String> no : arvore) {
             atualizarAnterior(no);
 
             if (no.previous == null) {
@@ -260,7 +257,7 @@ public class SimuladorAVL extends EngineFrame {
         }
     }
 
-    private void atualizarAnterior(ArvoreBinariaBusca.Node<Integer, String> no) {
+    private void atualizarAnterior(ArvoreAVL.Node<Integer, String> no) {
         if (no.left != null) {
             no.left.previous = no;
 
@@ -278,7 +275,7 @@ public class SimuladorAVL extends EngineFrame {
         if (elapsedTime >= 1.0) { // A cada 2 segundos
             if (indiceNoAtual < traverseNodes.getSize()) {
                 // Pinta o nó atual
-                ArvoreBinariaBusca.Node<Integer, String> noAtual = traverseNodes.get(indiceNoAtual);
+                ArvoreAVL.Node<Integer, String> noAtual = traverseNodes.get(indiceNoAtual);
                 noAtual.cor = noOrdem;
                 indiceNoAtual++;
             } else {
