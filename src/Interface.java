@@ -55,6 +55,8 @@ public class Interface extends javax.swing.JFrame {
         btnABB.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
         btnABB.setForeground(new java.awt.Color(235, 111, 146));
         btnABB.setText("ABB");
+        btnABB.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnABB.setFocusPainted(false);
         btnABB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnABBActionPerformed(evt);
