@@ -67,6 +67,7 @@ public class Interface extends javax.swing.JFrame {
         btnAVL.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
         btnAVL.setForeground(new java.awt.Color(235, 111, 146));
         btnAVL.setText("AVL");
+        btnAVL.setFocusPainted(false);
         btnAVL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAVLActionPerformed(evt);
@@ -77,6 +78,7 @@ public class Interface extends javax.swing.JFrame {
         btnAVP.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
         btnAVP.setForeground(new java.awt.Color(235, 111, 146));
         btnAVP.setText("AVP");
+        btnAVP.setFocusPainted(false);
         btnAVP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAVPActionPerformed(evt);

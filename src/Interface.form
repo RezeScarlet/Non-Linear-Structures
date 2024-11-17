@@ -146,6 +146,7 @@
               <Color blue="92" green="6f" red="eb" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="AVL"/>
+            <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAVLActionPerformed"/>
@@ -163,6 +164,7 @@
               <Color blue="92" green="6f" red="eb" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="AVP"/>
+            <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAVPActionPerformed"/>
