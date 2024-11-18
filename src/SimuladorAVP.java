@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 
 import arvores.ArvoreVermelhoPreto;
 import arvores.ArvoreVermelhoPreto.Node;
+import arvores.ArvoreVermelhoPreto.NodeColor;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
@@ -36,14 +37,10 @@ public class SimuladorAVP extends EngineFrame {
 
   private aesd.ds.interfaces.List<Node<Integer, String>> traverseNodes;
   private int margemCima;
-  // NOTE: Not used
-  // private int margemEsquerda;
   private int margemDireita;
   private int radius;
   private Vector2 espacamento;
   private Color texto = new Color(57, 53, 82);
-  // NOTE: Not used
-  // private Color noCor = new Color(235, 188, 186);
   private Color noOrdem = new Color(235, 111, 146);
   private Color lineColor = new Color(215, 130, 126);
   private String inserido;
@@ -121,28 +118,28 @@ public class SimuladorAVP extends EngineFrame {
     if (isKeyPressed(KEY_Q)) {
       this.dispose();
     }
-    if (isKeyPressed(KEY_ONE)) {
+    if (isKeyPressed(KEY_ONE) || isKeyPressed(KEY_KP_1)) {
       traverseState = traverse.PreOrder;
       elapsedTime = 1;
       indiceNoAtual = 0;
       traverseNodes = arvore.traversePreOrderDesenho();
     }
 
-    if (isKeyPressed(KEY_TWO)) {
+    if (isKeyPressed(KEY_TWO)|| isKeyPressed(KEY_KP_2)) {
       traverseState = traverse.InOrder;
       elapsedTime = 1;
       indiceNoAtual = 0;
       traverseNodes = arvore.traverseInOrderDesenho();
     }
 
-    if (isKeyPressed(KEY_THREE)) {
+    if (isKeyPressed(KEY_THREE) || isKeyPressed(KEY_KP_3)) {
       traverseState = traverse.PostOrder;
       elapsedTime = 1;
       indiceNoAtual = 0;
       traverseNodes = arvore.traversePostOrderDesenho();
     }
 
-    if (isKeyPressed(KEY_FOUR)) {
+    if (isKeyPressed(KEY_FOUR) || isKeyPressed(KEY_KP_4)) {
       traverseState = traverse.InLevel;
       elapsedTime = 1;
       indiceNoAtual = 0;
@@ -206,13 +203,16 @@ public class SimuladorAVP extends EngineFrame {
 
     }
     if (no.left != null) {
-      drawLine(no.centro.x, no.centro.y, no.left.centro.x, no.left.centro.y, lineColor);
-
+        if (no.left.color == NodeColor.RED) {
+            drawLine(no.centro.x, no.centro.y, no.left.centro.x, no.left.centro.y, RED);
+        } else {
+            drawLine(no.centro.x, no.centro.y, no.left.centro.x, no.left.centro.y, lineColor);
+        }
     }
     if (no.right != null) {
       drawLine(no.centro.x, no.centro.y, no.right.centro.x, no.right.centro.y, lineColor);
-
     }
+    
   }
 
   private void atualizarCentro(aesd.ds.interfaces.List<Node<Integer, String>> arvore) {
@@ -223,18 +223,25 @@ public class SimuladorAVP extends EngineFrame {
       atualizarAnterior(no);
 
       if (no.previous == null) {
-        no.centro = new Vector2(margemDireita / 2, espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis
+        no.centro = new Vector2(margemDireita / 2, espacamento.y * no.nivel + margemCima); // Nó raiz Bp
                                                                                            // duvida?
       } else {
+          
         if (no == no.previous.right) {
           no.centro = new Vector2((no.previous.centro.x + espacamento.x / no.nivel),
               espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
         } else {
-          no.centro = new Vector2(no.previous.centro.x - espacamento.x / no.nivel,
-              espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
+            if (no.color == NodeColor.RED) {
+                no.centro = new Vector2(no.previous.centro.x - (espacamento.x * 2.5) / no.nivel,
+              espacamento.y * no.previous.nivel + margemCima);
+            }
+            else {
+                no.centro = new Vector2(no.previous.centro.x - espacamento.x / no.nivel,
+                espacamento.y * no.nivel + margemCima); // muda a posição do nó, seis duvida?
         }
       }
     }
+  }
   }
 
   private void atualizarAnterior(ArvoreVermelhoPreto.Node<Integer, String> no) {
